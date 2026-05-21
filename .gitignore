@@ -17,6 +17,7 @@ client/.env.local
 client/.env.development.local
 client/.env.production.local
 client/.env.test.local
+client/.env.local.example
 
 # Server local env secrets
 server/.env
@@ -34,3 +35,4 @@ id_rsa.pub
 # Node/Python cache artifacts that may include local data
 node_modules/
 __pycache__/
+client/.next/

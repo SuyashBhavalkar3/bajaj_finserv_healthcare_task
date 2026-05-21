@@ -4,7 +4,10 @@ import { FormEvent, useMemo, useState } from "react";
 import ResultTable from "@/components/result-table";
 import { RunResponse } from "@/lib/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000").replace(
+  /\/$/,
+  ""
+);
 
 export default function HomePage() {
   const [rollNumber, setRollNumber] = useState("");
