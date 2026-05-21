@@ -15,6 +15,7 @@ export default function HomePage() {
   const [error, setError] = useState("");
   const [data, setData] = useState<RunResponse | null>(null);
   const [runAt, setRunAt] = useState("");
+  const [exporting, setExporting] = useState<"" | "excel" | "pdf">("");
 
   const passRateTone = useMemo(() => {
     const rate = data?.summary.success_rate ?? 0;
@@ -52,6 +53,72 @@ export default function HomePage() {
     if (!data) return "";
     return `Bajaj Health Automation Qualifier 1: Executed ${data.summary.total} API test cases using roll-number header validation and multi-angle payload checks. Passed ${data.summary.passed}, failed ${data.summary.failed}, success rate ${data.summary.success_rate}%.`;
   }, [data]);
+
+  async function downloadExcel() {
+    if (!data) return;
+    setExporting("excel");
+    try {
+      const XLSX = await import("xlsx");
+      const rows = data.results.map((row) => ({
+        ID: row.id,
+        "Test Case": row.name,
+        Category: row.category,
+        Expected: row.expected_status,
+        Actual: row.actual_status,
+        Status: row.passed ? "PASS" : "FAIL",
+        Response: row.response_excerpt,
+      }));
+      const sheet = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, sheet, "TestResults");
+      XLSX.writeFile(wb, `bajaj-test-report-${Date.now()}.xlsx`);
+    } finally {
+      setExporting("");
+    }
+  }
+
+  async function downloadPdf() {
+    if (!data) return;
+    setExporting("pdf");
+    try {
+      const jsPDFModule = await import("jspdf");
+      const autoTableModule = await import("jspdf-autotable");
+      const jsPDF = jsPDFModule.default;
+      const autoTable = autoTableModule.default;
+      const doc = new jsPDF({ orientation: "landscape" });
+      doc.setFontSize(14);
+      doc.text("Bajaj Finserv Health - API Automation Report", 14, 14);
+      doc.setFontSize(10);
+      doc.text(
+        `Run: ${runAt || new Date().toLocaleString()} | Total: ${data.summary.total} | Passed: ${data.summary.passed} | Failed: ${data.summary.failed} | Success: ${data.summary.success_rate}%`,
+        14,
+        21
+      );
+      autoTable(doc, {
+        startY: 27,
+        head: [["ID", "Test Case", "Category", "Expected", "Actual", "Status", "Response"]],
+        body: data.results.map((row) => [
+          row.id,
+          row.name,
+          row.category,
+          String(row.expected_status),
+          String(row.actual_status),
+          row.passed ? "PASS" : "FAIL",
+          row.response_excerpt,
+        ]),
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [0, 96, 209] },
+        columnStyles: {
+          1: { cellWidth: 45 },
+          2: { cellWidth: 30 },
+          6: { cellWidth: 95 },
+        },
+      });
+      doc.save(`bajaj-test-report-${Date.now()}.pdf`);
+    } finally {
+      setExporting("");
+    }
+  }
 
   return (
     <main className="page">
@@ -99,7 +166,36 @@ export default function HomePage() {
             <h3>Submission Snapshot</h3>
             <p>{submissionSummary}</p>
           </div>
+          <div className="actionRow">
+            <button
+              type="button"
+              className="secondaryBtn"
+              onClick={downloadExcel}
+              disabled={exporting !== ""}
+            >
+              {exporting === "excel" ? "Preparing Excel..." : "Download Excel"}
+            </button>
+            <button
+              type="button"
+              className="secondaryBtn"
+              onClick={downloadPdf}
+              disabled={exporting !== ""}
+            >
+              {exporting === "pdf" ? "Preparing PDF..." : "Download PDF"}
+            </button>
+          </div>
           <ResultTable rows={data.results} />
+        </section>
+      )}
+
+      {!data && !error && (
+        <section className="card emptyState">
+          <div className="emptyIcon">BH</div>
+          <h3>Ready To Execute Full API Suite</h3>
+          <p>
+            Enter your roll number and run the suite to view categorized test evidence, then
+            export complete results in Excel or PDF for submission.
+          </p>
         </section>
       )}
     </main>
