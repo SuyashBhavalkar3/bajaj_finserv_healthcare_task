@@ -1,4 +1,4 @@
-# Bajaj Health Automation Challenge - Qualifier 1 Submission
+# Bajaj Health Automation Challenge - Qualifier 1 Submission 
 
 FastAPI + Next.js implementation for validating the target create-user API from as many meaningful angles as possible.
 
