@@ -1,0 +1,213 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./app/globals.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --bg: #edf4ff;
+  --bg2: #ffffff;
+  --ink: #0f2747;
+  --muted: #4f6b8f;
+  --brand: #0060d1;
+  --brand-dark: #003f92;
+  --good: #166534;
+  --bad: #b91c1c;
+  --card: #ffffff;
+  --line: #cfe0f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #ddebff, var(--bg) 36%, var(--bg2));
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #ffffff, #f4f9ff 45%, #eaf3ff);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 16px 40px -28px #0056b355;
+}
+
+.brandRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.brandTag,
+.brandSubTag {
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.brandTag {
+  background: #dbeafe;
+  color: #0b3f82;
+}
+
+.brandSubTag {
+  background: #e8f1ff;
+  color: #1d4f97;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.controls {
+  margin-top: 16px;
+  display: grid;
+  grid-gap: 12px;
+  gap: 12px;
+}
+
+input[type="text"] {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+button {
+  width: max-content;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: linear-gradient(180deg, #0b6ce4, var(--brand));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(180deg, #0d63cb, var(--brand-dark));
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.card {
+  margin-top: 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 14px 30px -26px #003f9255;
+}
+
+.metaRow {
+  margin-bottom: 10px;
+}
+
+.metaLabel {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1e3a5f;
+  border: 1px solid #d7e6fa;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background: #f7fbff;
+}
+
+.submissionBox {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #d6e6ff;
+  border-left: 5px solid var(--brand);
+  border-radius: 12px;
+  background: #f7fbff;
+  padding: 12px;
+}
+
+.submissionBox h3 {
+  margin: 0 0 6px;
+  font-size: 0.98rem;
+}
+
+.submissionBox p {
+  margin: 0;
+  color: #1f3f6a;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f4f9ff;
+}
+
+.pill {
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.pass {
+  color: var(--good);
+  background: #dcfce7;
+}
+
+.fail {
+  color: var(--bad);
+  background: #fee2e2;
+}
+
+@media (max-width: 700px) {
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+}
+

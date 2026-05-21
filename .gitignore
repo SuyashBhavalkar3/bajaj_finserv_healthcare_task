@@ -1,0 +1,36 @@
+bajaj_env/
+bajaj_env
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Client local env secrets
+client/.env.local
+client/.env.development.local
+client/.env.production.local
+client/.env.test.local
+
+# Server local env secrets
+server/.env
+server/.env.*
+
+# Credentials/keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+
+# Node/Python cache artifacts that may include local data
+node_modules/
+__pycache__/
